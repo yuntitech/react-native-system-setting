@@ -128,6 +128,12 @@ export default class SystemSetting {
         SystemSettingNative.setVolume(val, config)
     }
 
+    static setShowVolumeUI(val){
+        if(Platform.OS ==='ios'){
+            SystemSettingNative.setShowVolumeUI(val)
+        }
+    }
+
     static addVolumeListener(callback) {
         return eventEmitter.addListener('EventVolume', callback)
     }
@@ -207,12 +213,12 @@ export default class SystemSetting {
                 if (supported) await Linking.openURL(settingsLink);
                 break;
             }
-            case 'android': 
+            case 'android':
                 await SystemSettingNative.openAppSystemSettings()
                 break;
             default:
                 throw new Error('unknown platform')
-                break;    
+                break;
         }
     }
 

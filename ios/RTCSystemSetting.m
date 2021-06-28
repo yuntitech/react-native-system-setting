@@ -103,6 +103,12 @@ RCT_EXPORT_METHOD(setVolume:(float)val config:(NSDictionary *)config){
     });
 }
 
+RCT_EXPORT_METHOD(setShowVolumeUI:(BOOL)val){
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [self showVolumeUI:(val)];
+    });
+}
+
 RCT_EXPORT_METHOD(getVolume:(NSString *)type resolve:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
     dispatch_sync(dispatch_get_main_queue(), ^{
         resolve([NSNumber numberWithFloat:[volumeSlider value]]);
