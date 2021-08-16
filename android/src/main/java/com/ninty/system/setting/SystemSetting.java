@@ -64,7 +64,7 @@ public class SystemSetting extends ReactContextBaseJavaModule implements Activit
         volumeBR = new VolumeBroadcastReceiver();
     }
 
-    private void registerVolumeReceiver() {
+    private synchronized void registerVolumeReceiver() {
         if (!volumeBR.isRegistered()) {
             IntentFilter filter = new IntentFilter("android.media.VOLUME_CHANGED_ACTION");
             mContext.registerReceiver(volumeBR, filter);
@@ -72,7 +72,7 @@ public class SystemSetting extends ReactContextBaseJavaModule implements Activit
         }
     }
 
-    private void unregisterVolumeReceiver() {
+    private synchronized void unregisterVolumeReceiver() {
         if (volumeBR.isRegistered()) {
             mContext.unregisterReceiver(volumeBR);
             volumeBR.setRegistered(false);
